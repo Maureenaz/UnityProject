@@ -4,43 +4,30 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    public float spawnTime;
-    public float spawnStart;
+    public GameObject[] ennemies;
+    public Transform[] spawnPoint;
 
-    public int OeilVolant;
+    private int rand;
 
-    public GameObject[] ennemy;
+    public float startTimeBtwSpawns;
+    private float timeBtwSpawns;
 
-    void OnCollisionEnter2D(Collision2D coll)
+    private void Start()
     {
-        if (coll.gameObject.tag == "Player")
-        {
-            Debug.Log("spawn");
-
-           StartCoroutine(coroutine());
-        }
+        timeBtwSpawns = startTimeBtwSpawns;
     }
 
-    IEnumerator coroutine()
+    private void Update()
     {
-        while (true)
+        if (timeBtwSpawns <= 0)
         {
-            Debug.Log("start coroutine at : " + Time.time);
-
-            for (int i = 0; i < OeilVolant; i++)
-            {
-                int OeilIndex = Random.Range(0, ennemy.Length);
-                Instantiate(ennemy[OeilIndex], transform.position, transform.rotation);
-
-                yield return new WaitForSeconds(5);
-                Debug.Log("Spawn);
-            }
+            rand = Random.Range(0, ennemies.Length);
+            Instantiate(ennemies[0], spawnPoint[rand].transform.position, Quaternion.identity);
+            timeBtwSpawns = startTimeBtwSpawns;
+        }
+        else
+        {
+            timeBtwSpawns -= Time.deltaTime;
         }
     }
-
-    //void spawn()
-    //{
-    //    OeilVolant = Random.Range(0, ennemy.Length);
-    //    Instantiate(ennemy[OeilVolant, transform.position, transform.rotation]);
-    //}
 }
