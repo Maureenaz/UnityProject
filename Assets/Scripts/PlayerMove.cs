@@ -13,6 +13,8 @@ public class PlayerMove : MonoBehaviour
     public float checkRadius;
     public float jumpForce;
 
+    public GameObject obj;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,14 @@ public class PlayerMove : MonoBehaviour
     {
         float MoveInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(MoveInput * speed, rb.velocity.y);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.collider.CompareTag("End"))
+        {
+            Debug.Log("HELLO");
+        }
     }
 
     void Update()
