@@ -7,6 +7,14 @@ public class Destroy : MonoBehaviour
     public float timer;
     public GameObject destroyer;
     public GameObject destroyer2;
+
+    public float TimeBoss;
+    public GameObject spawn;
+
+    void Start()
+    {
+        Invoke("SpawnBoss", TimeBoss);   
+    }
     void OnCollisionEnter2D(Collision2D collision)
     {
 
@@ -17,6 +25,11 @@ public class Destroy : MonoBehaviour
             Destroy(destroyer, timer);
             Destroy(destroyer2, timer);
         }
+    }
+
+    void SpawnBoss()
+    {
+        Instantiate(spawn, transform.position, Quaternion.identity);
     }
     // Update is called once per frame
     void Update()
