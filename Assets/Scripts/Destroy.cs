@@ -26,14 +26,4 @@ public class Destroy : MonoBehaviour
             Destroy(destroyer2, timer);
         }
     }
-
-    void SpawnBoss()
-    {
-        Instantiate(spawn, transform.position, Quaternion.identity);
-    }
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }
