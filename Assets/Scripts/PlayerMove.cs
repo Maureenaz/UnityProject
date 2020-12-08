@@ -15,6 +15,12 @@ public class PlayerMove : MonoBehaviour
 
     public GameObject obj;
 
+    public GameObject Bullets;
+    public Vector2 velocity;
+    bool Shoot = true;
+    public Vector2 offset = new Vector2(0.4f, 0.1f);
+    public float down;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,5 +51,18 @@ public class PlayerMove : MonoBehaviour
             rb.velocity = Vector2.up * jumpForce;
             Debug.Log("up");
         }
+
+        if (Input.GetKeyDown(KeyCode.Space) && Shoot)
+        {
+            GameObject go = (GameObject) Instantiate(Bullets,(Vector2) transform.position + offset * transform.localScale.x, Quaternion.identity);
+            go.GetComponent<Rigidbody2D>().velocity = new Vector2(velocity.x * transform.localScale.x, velocity.y);
+        }
+    }
+
+    IEnumerable shoot()
+    {
+        Shoot = false;
+        yield return new WaitForSeconds(down);
+        Shoot = true;
     }
 }
