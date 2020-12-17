@@ -8,6 +8,7 @@ TagManager:
   - Monster
   - End
   - Waal
+  - Ennemies
   layers:
   - Default
   - TransparentFX

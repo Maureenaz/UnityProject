@@ -4,26 +4,16 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float timeBtwShot;
-    public float StartTimeBtwShot;
-    public GameObject projectiles;
-    // Start is called before the first frame update
-    void Start()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        timeBtwShot = StartTimeBtwShot;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (timeBtwShot <= 0)
+        if (collision.gameObject.tag == "Ennemies")
         {
-            Instantiate(projectiles, transform.position,Quaternion.identity);
-            timeBtwShot = StartTimeBtwShot;
+            Destroy(gameObject);
         }
-        else
+
+        if (collision.gameObject.tag == "Waal")
         {
-            timeBtwShot -= Time.deltaTime;
+            Destroy(gameObject);
         }
     }
 }

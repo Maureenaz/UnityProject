@@ -48,4 +48,12 @@ public class Boss : MonoBehaviour
             nextFire = Time.time + fireRate;
         }
     }
+
+    void OnTriggerEnter2D(Collider2D collisi)
+    {
+        if (collisi.gameObject.name.Equals("Bullets_0"))
+        {
+            heart -= damage;
+        }
+    }
 }
